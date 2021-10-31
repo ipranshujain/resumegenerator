@@ -1,0 +1,22 @@
+.form-container{
+  padding: 1.2rem;
+  font-family: monospace;
+}
+.add-icon-container{
+  border-radius: 1.2rem;
+  padding: 10px;
+  width:fit-content;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.add-icon-container .add-icon-title{
+  margin-left: 0.6rem;
+  font-size: 1.3rem;
+}
+
+.add-icon-container:hover{
+  background-color: yellow;
+}
+
