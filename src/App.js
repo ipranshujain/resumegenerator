@@ -55,8 +55,10 @@ function App() {
       <div className="form-container">
         <h1>Enter Personal Info</h1>
         <input
+
           placeholder="Enter your full name"
           type="name"
+          className="input-name"
           value={resumeData.fullName}
         />
         <input

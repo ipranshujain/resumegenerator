@@ -1,44 +1,95 @@
+:root {
+  --white: #fff;
+  --blue: #fbb;
+}
+h1 {
+  color: var(--white);
+}
 
-.form-container{
+.form-container {
   padding: 1.2rem;
   font-family: monospace;
+
+  background-repeat: no-repeat;
+  background-size: contain;
 }
-.add-icon-container{
+.add-icon-container {
   border-radius: 1.2rem;
   padding: 10px;
-  width:fit-content;
+  width: fit-content;
   display: flex;
   align-items: center;
   cursor: pointer;
 }
 
-.add-icon-container .add-icon-title{
+.add-icon-container .add-icon-title {
   margin-left: 0.6rem;
   font-size: 1.3rem;
 }
 
-.add-icon-container:hover{
+.add-icon-container:hover {
   background-color: yellow;
 }
 
-.dialog-box-container{
+.dialog-box-container {
   position: fixed;
   top: 0;
-  bottom: 0;
+  left: 0;
   width: 100vw;
+  padding: 0;
+  margin: 0px;
   height: 100vh;
   display: flex;
   justify-content: center;
+  /* background-image: url(https://gifimage.net/wp-content/uploads/2017/11/gif-student-3.gif); */
+  background: rgba(0, 0, 0, 0.301);
+  /* background-size: 100% 100%; */
+  /* background-repeat: no-repeat; */
+
   align-items: center;
 }
-.dialog-box{
+.dialog-box {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 3rem;
-  background: white;
+  width: 50%;
+  background:rgb(122, 140, 219);
   border-radius: 1rem;
   border: 0.2rem solid black;
+ 
+  padding: 50px;
 }
 
+.input-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+padding: 20px;
+background: white;
+margin-bottom: 20px;
+border-radius: 1rem;
+}
+.input-box > label {
+  border-bottom: 2px solid black;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.input-box > input, textarea {
+  width: 100%;
+  font-family: monospace;
+  font-size: 1.3rem;
+  padding-top: 1rem;
+  border-width: 0px;
+  border-bottom: 2px orange solid;
+}
+.dialog-button{
+  font-size: 1.5rem;
+  border-radius: 1rem;
+  background: rgb(214, 214, 219);
+  border: 2px solid orange;
+  font-family: monospace;
+  font-weight: bold;
+  padding: 0.7rem;
+}

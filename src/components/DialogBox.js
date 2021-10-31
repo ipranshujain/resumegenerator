@@ -11,26 +11,33 @@ export default function DialogBox({
       <div className="dialog-box">
         {elementInputs.map((elementInput, idx) => {
           return elementInput.inputUsed === "input" ? (
-            <input
-              placeholder={elementInput.hintMessage}
-              value={element[elementInput.fieldName]}
-              onChange={(e) => {
-                editElement(e, i, elementInput.fieldName, fieldName);
-              }}
-              type={elementInput.fieldType}
-            />
+            <div className="input-box">
+              <label>{elementInput.fieldName} </label>
+
+              <input
+                placeholder={elementInput.hintMessage}
+                value={element[elementInput.fieldName]}
+                onChange={(e) => {
+                  editElement(e, i, elementInput.fieldName, fieldName);
+                }}
+                type={elementInput.fieldType}
+              />
+            </div>
           ) : (
-            <textarea
-              placeholder={elementInput.hintMessage}
-              value={element[elementInput.fieldName]}
-              onChange={(e) => {
-                editElement(e, i, elementInput.fieldName, fieldName);
-              }}
-              type={elementInput.fieldType}
-            />
+            <div className="input-box">
+                <label>{elementInput.fieldName} </label>
+              <textarea
+                placeholder={elementInput.hintMessage}
+                value={element[elementInput.fieldName]}
+                onChange={(e) => {
+                  editElement(e, i, elementInput.fieldName, fieldName);
+                }}
+                type={elementInput.fieldType}
+              />
+            </div>
           );
         })}
-        <button onClick={() => setShowDialog({ show: false, field: "" })}>
+        <button onClick={() => setShowDialog({ show: false, field: "" })} className="dialog-button">
           Done
         </button>
       </div>
