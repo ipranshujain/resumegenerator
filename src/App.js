@@ -1,15 +1,11 @@
-import logo from "./logo.svg";
 import "./App.css";
-import { AiFillPlusCircle } from "react-icons/ai";
 import AddIcon from "./components/AddIcon";
 import { useState } from "react";
-// const tempData = {
-//   title: "Google",
-//   from: "12 Oct 2020",
-//   to: "30 November 2021",
-//   description:
-//     "I have used tech skills to build awesome infrastructure for google that is helping millions of people around the world.",
-// };
+import Experience from "./components/Experience";
+import DialogBox from "./components/DialogBox";
+import { experienceInputs } from "./utils/inputUtil";
+import inputs from "./utils/inputUtil";
+
 function App() {
   const [resumeData, setResumeData] = useState({
     fullName: "",
@@ -20,25 +16,39 @@ function App() {
     skills: [],
     achievements: [],
   });
-  function addExperience(){
-    let exp = resumeData.experiences
-    let lastexp = resumeData.experiences[exp.length - 1]
-    if((exp.length!==0) && (lastexp.title.length === 0 || lastexp.from.length === 0 || lastexp.to.length === 0 || lastexp.description.length === 0)){
-      alert("Please fill correct value first")
-      return
-    }
-    let experience = {
-      title: "",
-      from: "",
-      to: "",
-      description: "",
-    }
-
-    setResumeData({...resumeData, experiences: resumeData.experiences.concat(experience)});
+  const [showDialog, setShowDialog] = useState({
+    show: false,
+    field: "",
+  });
+  function addElement(fieldName) {
+    // let exp = resumeData[fieldName];
+    // let lastexp = resumeData[fieldName][exp.length - 1];
+    // if (
+    //   exp.length !== 0 &&
+    //   (lastexp.title.length === 0 ||
+    //     lastexp.from.length === 0 ||
+    //     lastexp.to.length === 0 ||
+    //     lastexp.description.length === 0)
+    // ) {
+    //   alert("Please fill correct value first");
+    //   return;
+    // }
+    let element = {};
+    inputs[`${fieldName}Inputs`].map((input, idx) => {
+      return (element[input.fieldName] = "");
+    });
+    console.log("Successfully set ", fieldName, "equal to  ", element);
+    const resultantData = JSON.parse(JSON.stringify(resumeData));
+    resultantData[fieldName] = resultantData[fieldName].concat(element);
+    setResumeData({
+      ...resultantData,
+    });
+    setShowDialog({ show: true, field: fieldName });
   }
-  function editExperience(e, i,  attribute){
-    resumeData.experiences[i][`${attribute}`] = e.target.value;
-    setResumeData({...resumeData, experiences: [...resumeData.experiences]})
+  function editElement(e, i, attribute, fieldName) {
+    console.log(e.target.value, i, attribute, fieldName);
+    resumeData[fieldName][i][`${attribute}`] = e.target.value;
+    setResumeData({ ...resumeData });
   }
   return (
     <div className="App">
@@ -62,37 +72,19 @@ function App() {
         <h1>Enter Experience</h1>
         {resumeData.experiences.map((experience, i) => {
           return (
-            <div className="experience" key={i} >
-              <input placeholder="Enter Job Name" value={experience.title} 
-                onChange={(e)=>{
-                  editExperience(e, i, "title")
-                }}
-              />
-              <input
-                placeholder="Enter Job Description"
-                value={experience.description}
-                onChange={(e)=>{
-                  editExperience(e, i, "description")
-                }}
-              />
-              <input
-                placeholder="Enter starting date"
-                onChange={(e)=>{
-                  editExperience(e, i, "from")
-                }}
-                value={experience.from}
-              />
-              <input placeholder="Enter ending date" value={experience.to} 
-              onChange={(e)=>{
-                editExperience(e, i, "to")
-              }}
-              />
-            </div>
+            <Experience
+              experience={experience}
+              editExperience={editElement}
+              key={i}
+              i={i}
+            />
           );
         })}
-        <AddIcon onClick={() => addExperience()}>
+        {}
+        <AddIcon onClick={() => addElement("experiences")}>
           Add Experience
         </AddIcon>
+
         <h1>Enter Education</h1>
         <AddIcon>Add Education</AddIcon>
 
@@ -100,6 +92,16 @@ function App() {
         <AddIcon>Add Skills</AddIcon>
         <h1>Enter Achievements</h1>
         <AddIcon>Add Achievements</AddIcon>
+        {showDialog.show && showDialog.field !== "" && (
+          <DialogBox
+            element={resumeData[`${showDialog.field}`]}
+            editElement={editElement}
+            elementInputs={inputs[`${showDialog.field}Inputs`]}
+            setShowDialog={setShowDialog}
+            fieldName={showDialog.field}
+            i={resumeData[showDialog.field].length - 1}
+          />
+        )}
       </div>
     </div>
   );
