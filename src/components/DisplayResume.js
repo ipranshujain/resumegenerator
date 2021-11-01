@@ -1,6 +1,11 @@
+import { useRef } from "react";
 import { AiFillPhone } from "react-icons/ai";
 import { MdEmail } from "react-icons/md";
-import { getProgress, transformDate } from "../utils/helperUtil";
+import {
+  downloadResume,
+  getProgress,
+  transformDate,
+} from "../utils/helperUtil";
 export default function DisplayResume({ resumeData }) {
   const {
     fullName,
@@ -11,11 +16,11 @@ export default function DisplayResume({ resumeData }) {
     educations,
     achievements,
   } = resumeData;
-
+  const resumeRef = useRef();
   return (
     <div className="display-resume">
       <div className="display-resume-head">Resume Preview</div>
-      <div className="resume-container">
+      <div className="resume-container" ref={resumeRef}>
         <div className="personal-info">
           <div className="person-name">{fullName}</div>
           <div className="person-other-info">
@@ -113,7 +118,12 @@ export default function DisplayResume({ resumeData }) {
           })}
         </div>
       </div>
-      <button className="resume-save">Print/Save Resume</button>
+      <button
+        className="resume-save"
+        onClick={() => downloadResume(resumeRef, resumeData)}
+      >
+        Download Resume PDF
+      </button>
     </div>
   );
 }

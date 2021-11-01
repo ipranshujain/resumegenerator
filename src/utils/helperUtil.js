@@ -88,3 +88,18 @@ export function checkValidFields(elementInputs, element, setShowAlert) {
 export function saveToLocalStorage(resumeData) {
   localStorage.setItem("resumeData", JSON.stringify(resumeData));
 }
+
+export function downloadResume(resumeRef, resumeData) {
+  const resume = resumeRef.current;
+  const title = resumeData.fullName + " Resume";
+  let convertedTitle = "";
+  for (let i = 0; i < title.length; i++) {
+    let value = title[i];
+    if (value === " ") {
+      convertedTitle += "_";
+    } else {
+      convertedTitle += value.toLowerCase();
+    }
+  }
+  window.print();
+}
