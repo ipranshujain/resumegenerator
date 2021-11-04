@@ -14,16 +14,16 @@ export function PersonalInfoDisplay({ resumeData }) {
     <div className="personal-info">
       <div className="person-name">{fullName}</div>
       <div className="person-other-info">
-        <div className="person-email">
-          <div>{email.length ? <MdEmail fontSize={17} /> : ""}</div>
+        <div className="person-social">
+          <div>{email.length ? <MdEmail fontSize={20} /> : ""}</div>
           <div>{email}</div>
         </div>
-        <div className="person-phone-no">
-          <div>{phoneNo.length ? <AiFillPhone fontSize={17} /> : ""}</div>
+        <div className="person-social">
+          <div>{phoneNo.length ? <AiFillPhone fontSize={20} /> : ""}</div>
           <div>{phoneNo}</div>
         </div>
 
-        <div className="person-github">
+        <div className="person-social">
           {github.length ? (
             <a href={github} className="social-icon">
               <AiFillGithub size={SOCIAL_ICON_SIZE} />
@@ -32,7 +32,7 @@ export function PersonalInfoDisplay({ resumeData }) {
             ""
           )}
         </div>
-        <div className="person-twitter">
+        <div className="person-social">
           {twitter.length ? (
             <a href={twitter} className="social-icon">
               <AiFillTwitterCircle size={SOCIAL_ICON_SIZE} />
@@ -41,7 +41,7 @@ export function PersonalInfoDisplay({ resumeData }) {
             ""
           )}
         </div>
-        <div className="person-linkedin">
+        <div className="person-social">
           {linkedin.length ? (
             <a href={linkedin} className="social-icon">
               <AiFillLinkedin size={SOCIAL_ICON_SIZE} />
@@ -50,7 +50,7 @@ export function PersonalInfoDisplay({ resumeData }) {
             ""
           )}
         </div>
-        <div className="person-portfolio">
+        <div className="person-social">
           {portfolio.length ? (
             <a href={portfolio} className="social-icon">
               <BsPersonCircle size={SOCIAL_ICON_SIZE} />

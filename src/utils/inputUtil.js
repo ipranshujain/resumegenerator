@@ -240,6 +240,8 @@ const sampleResumeData = {
         "I have worked at google android team to build scalable sdks and apis and deployed various modules for proper use case.",
       from: "2021-10-05",
       to: "2021-11-10",
+      githubLink: "",
+      deployedLink: "",
     },
     {
       title: "Amazon, Pune",
@@ -247,6 +249,8 @@ const sampleResumeData = {
         "Worked with AWS Cloud to build ML based models for solving problems related to cyber security and threats accompying mislicious attacks.",
       from: "2021-11-25",
       to: "",
+      githubLink: "",
+      deployedLink: "",
     },
   ],
   educations: [
@@ -295,6 +299,8 @@ const sampleResumeData = {
         "Used ReactJS to build the frontend of this application, NodeJS to build the backend, mongo for database, and GraphQL from querying data. This e-commerce site mimics some behavior of other sites but is unique in a way that allows users to negotiate prices with the client.",
       from: "2021-10-02",
       to: "2021-11-09",
+      githubLink: "",
+      deployedLink: "",
     },
     {
       title: "Decentralized Twitter, (Algorand, Web3) ",
@@ -302,6 +308,8 @@ const sampleResumeData = {
         "In this project, I have created a small decentralized version of Twitter which means that no one owns it and all the history about users is immutable and therefore it is trustless.",
       from: "2021-11-02",
       to: "2021-11-30",
+      githubLink: "",
+      deployedLink: "",
     },
   ],
 };

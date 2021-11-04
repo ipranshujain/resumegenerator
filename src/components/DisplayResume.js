@@ -2,6 +2,8 @@ import { useEffect, useRef } from "react";
 
 import { downloadResume, transformDate } from "../utils/helperUtil";
 import { PersonalInfoDisplay } from "./PersonalInfoDisplay";
+import { HiExternalLink } from "react-icons/hi";
+import { AiFillGithub } from "react-icons/ai";
 export default function DisplayResume({
   resumeData,
   setNotIdeal,
@@ -52,7 +54,29 @@ export default function DisplayResume({
                     <div className="person-elements-box">
                       {element.title && (
                         <div className="person-elements-element-title">
-                          {element.title}
+                          <div>{element.title}</div>
+                          <div className="resume-link">
+                            {element.githubLink && (
+                              <div>
+                                <a
+                                  className="social-icon"
+                                  href={element.githubLink}
+                                >
+                                  <AiFillGithub size={17} />
+                                </a>
+                              </div>
+                            )}
+                            {element.deployedLink && (
+                              <div>
+                                <a
+                                  className="social-icon"
+                                  href={element.deployedLink}
+                                >
+                                  <HiExternalLink size={17} />
+                                </a>
+                              </div>
+                            )}
+                          </div>
                         </div>
                       )}
                       {element.from && typeof element.to !== "undefined" && (
