@@ -62,6 +62,9 @@ function App() {
       setResumeData(sampleResumeData);
     }
   }, []);
+  useEffect(() => {
+    document.title = resumeData.fullName + " Resume";
+  }, [resumeData]);
   function resetDialog() {
     setShowDialog({ show: false, field: "", index: -1, isEdit: false });
   }
