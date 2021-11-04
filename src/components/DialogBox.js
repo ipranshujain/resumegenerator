@@ -13,13 +13,13 @@ export default function DialogBox({
 }) {
   const { field: fieldName, index, isEdit } = showDialog;
   const setShowAlert = useContext(ResumeAlertContext);
-  function dialogDone() {
+  function dialogDone(e) {
     if (checkValidFields(elementInputs, element, setShowAlert)) {
       resetDialog();
       saveToLocalStorage(resumeData);
     }
   }
-  function dialogDelete() {
+  function dialogDelete(e) {
     resetDialog();
     deleteElement(fieldName, index);
   }
@@ -31,7 +31,9 @@ export default function DialogBox({
             <div className="input-box" key={idx}>
               <label>
                 {elementInput.labelName
-                  ? elementInput.labelName
+                  ? `${elementInput.labelName} ${
+                      elementInput.isRequired ? "(*)" : "(Optional)"
+                    }`
                   : elementInput.fieldName}
               </label>
               {elementInput.inputUsed === "input" ? (
@@ -41,6 +43,7 @@ export default function DialogBox({
                   onChange={(e) => {
                     editElement(e, index, elementInput.fieldName, fieldName);
                   }}
+                  // required={elementInput.isRequired}
                   type={elementInput.fieldType}
                 />
               ) : (
@@ -51,6 +54,7 @@ export default function DialogBox({
                   onChange={(e) => {
                     editElement(e, index, elementInput.fieldName, fieldName);
                   }}
+                  // required={elementInput.isRequired}
                   type={elementInput.fieldType}
                 />
               )}

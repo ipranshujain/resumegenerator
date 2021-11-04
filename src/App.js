@@ -2,35 +2,43 @@ import "./App.css";
 import AddIcon from "./components/AddIcon";
 import { useState, createContext, useEffect } from "react";
 
-import Experience from "./components/Experience";
-import Education from "./components/Education";
-import Skill from "./components/Skill";
-import Achievement from "./components/Achievement";
+import Element from "./components/Element";
+// import Education from "./components/Education";
+// import Skill from "./components/Skill";
+// import Achievement from "./components/Achievement";
+// import Project from "./components/Achievement";
 
 import DialogBox from "./components/DialogBox";
-import inputs from "./utils/inputUtil";
+import inputs, { emptyResumeData, sampleResumeData } from "./utils/inputUtil";
 import DisplayResume from "./components/DisplayResume";
 import ShowAlert from "./components/ShowAlert";
 import { saveToLocalStorage } from "./utils/helperUtil";
 const ResumeAlertContext = createContext();
 export { ResumeAlertContext };
 function App() {
-  const [resumeData, setResumeData] = useState({
-    fullName: "",
-    email: "",
-    phoneNo: "",
-    experiences: [],
-    educations: [],
-    skills: [],
-    achievements: [],
-  });
+  const [resumeData, setResumeData] = useState(emptyResumeData);
   const [showDialog, setShowDialog] = useState({
     show: false,
     field: "",
     index: -1,
     isEdit: false,
   });
-
+  const sequence = [
+    {
+      name: "experiences",
+      label: "Experience (Job/Internship)",
+    },
+    {
+      name: "projects",
+      label: "Projects",
+    },
+    {
+      name: "educations",
+      label: "Education",
+    },
+    { name: "skills", label: "Skills" },
+    { name: "achievements", label: "Achievements" },
+  ];
   const [showAlert, setShowAlert] = useState({
     message: "",
     duration: 0,
@@ -38,9 +46,21 @@ function App() {
     isShow: false,
   });
 
+  const [notIdeal, setNotIdeal] = useState(false);
   useEffect(() => {
     const newResumeData = JSON.parse(localStorage.getItem("resumeData"));
+    console.log(newResumeData);
     if (newResumeData) setResumeData(newResumeData);
+    else {
+      setShowAlert({
+        message:
+          "No saved data found therefore a sample resume is loaded for you, if you want you can click on Start Blank Project to start empty project or you can edit this sample.",
+        duration: 10000,
+        isShow: true,
+        color: "#2170bf",
+      });
+      setResumeData(sampleResumeData);
+    }
   }, []);
   function resetDialog() {
     setShowDialog({ show: false, field: "", index: -1, isEdit: false });
@@ -81,102 +101,73 @@ function App() {
   return (
     <ResumeAlertContext.Provider value={setShowAlert}>
       <div className="App">
+        <div className={"alert-box " + (notIdeal ? "show-alert" : "")}>
+          Remainder: One Page Resume is ideal. Current resume length may exceed
+          it.
+        </div>
         <div className="distribute">
           <div className="form-container">
+            <div className="nav-buttons">
+              <div
+                className="blank-project"
+                onClick={() => {
+                  setResumeData(emptyResumeData);
+                }}
+              >
+                Start Blank Project
+              </div>
+              <div
+                className="blank-project"
+                onClick={() => {
+                  setResumeData(sampleResumeData);
+                }}
+              >
+                Load Sample Resume
+              </div>
+            </div>
             <div className="element personal-details-container">
               <h1>Enter Personal Info</h1>
-              <input
-                placeholder="Enter your full name"
-                type="name"
-                className="input-name"
-                onChange={(e) =>
-                  setResumeData({ ...resumeData, fullName: e.target.value })
-                }
-                onBlur={() => saveToLocalStorage(resumeData)}
-                value={resumeData.fullName}
-              />
-              <input
-                placeholder="Enter your email"
-                type="email"
-                value={resumeData.email}
-                onBlur={() => saveToLocalStorage(resumeData)}
-                onChange={(e) =>
-                  setResumeData({ ...resumeData, email: e.target.value })
-                }
-              />
-              <input
-                placeholder="Phone number"
-                type="number"
-                value={resumeData.phoneNo}
-                onBlur={() => saveToLocalStorage(resumeData)}
-                onChange={(e) =>
-                  setResumeData({ ...resumeData, phoneNo: e.target.value })
-                }
-              />
-            </div>
-            <div className="experience-container">
-              <h1>Enter Experience</h1>
-              {resumeData.experiences.map((experience, i) => {
+              {inputs.personalInfoInputs.map((element, idx) => {
                 return (
-                  <Experience
-                    element={experience}
-                    editElementSection={editElementSection}
-                    key={i}
-                    idx={i}
+                  <input
+                    placeholder={element.hintMessage}
+                    type={element.fieldType}
+                    className="input-name"
+                    onChange={(e) => {
+                      const newResumeData = resumeData;
+                      newResumeData[element.fieldName] = e.target.value;
+                      setResumeData({ ...newResumeData });
+                    }}
+                    onBlur={() => saveToLocalStorage(resumeData)}
+                    value={resumeData[element.fieldName]}
+                    key={idx}
                   />
                 );
               })}
-              <AddIcon onClick={() => addElement("experiences")}>
-                Add Experience
-              </AddIcon>
             </div>
+            {sequence.map((obj, idx) => {
+              const field = obj.name;
+              return (
+                <div key="idx" className="experience-container">
+                  <h1>Enter {field.substr(0, field.length - 1)}</h1>
+                  {resumeData[field].map((element, i) => {
+                    return (
+                      <Element
+                        element={element}
+                        editElementSection={editElementSection}
+                        key={i}
+                        field={field}
+                        idx={i}
+                      />
+                    );
+                  })}
+                  <AddIcon onClick={() => addElement("experiences")}>
+                    Add {field.substr(0, field.length - 1)}
+                  </AddIcon>
+                </div>
+              );
+            })}
 
-            <div className="education-container">
-              <h1>Enter Education</h1>
-              {resumeData.educations.map((element, i) => {
-                return (
-                  <Education
-                    element={element}
-                    editElementSection={editElementSection}
-                    key={i}
-                    idx={i}
-                  />
-                );
-              })}
-              <AddIcon onClick={() => addElement("educations")}>
-                Add Education
-              </AddIcon>
-            </div>
-            <div className="skill-container">
-              <h1>Enter Skills</h1>
-              {resumeData.skills.map((element, i) => {
-                return (
-                  <Skill
-                    element={element}
-                    editElementSection={editElementSection}
-                    key={i}
-                    idx={i}
-                  />
-                );
-              })}
-              <AddIcon onClick={() => addElement("skills")}>Add Skill</AddIcon>
-            </div>
-            <div className="achievement-container">
-              <h1>Enter Achievements</h1>
-              {resumeData.achievements.map((element, i) => {
-                return (
-                  <Achievement
-                    element={element}
-                    editElementSection={editElementSection}
-                    key={i}
-                    idx={i}
-                  />
-                );
-              })}
-              <AddIcon onClick={() => addElement("achievements")}>
-                Add Achievement
-              </AddIcon>
-            </div>
             {showDialog.show && showDialog.field !== "" && (
               <DialogBox
                 element={resumeData[`${showDialog.field}`][showDialog.index]}
@@ -189,7 +180,12 @@ function App() {
               />
             )}
           </div>
-          <DisplayResume resumeData={resumeData} />
+          <DisplayResume
+            resumeData={resumeData}
+            notIdeal={notIdeal}
+            setNotIdeal={setNotIdeal}
+            sequence={sequence}
+          />
         </div>
         <ShowAlert showAlert={showAlert} setShowAlert={setShowAlert} />
       </div>

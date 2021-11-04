@@ -1,128 +1,88 @@
-import { useRef } from "react";
-import { AiFillPhone } from "react-icons/ai";
-import { MdEmail } from "react-icons/md";
-import {
-  downloadResume,
-  getProgress,
-  transformDate,
-} from "../utils/helperUtil";
-export default function DisplayResume({ resumeData }) {
-  const {
-    fullName,
-    email,
-    phoneNo,
-    experiences,
-    skills,
-    educations,
-    achievements,
-  } = resumeData;
+import { useEffect, useRef } from "react";
+
+import { downloadResume, transformDate } from "../utils/helperUtil";
+import { PersonalInfoDisplay } from "./PersonalInfoDisplay";
+export default function DisplayResume({
+  resumeData,
+  setNotIdeal,
+  notIdeal,
+  sequence,
+}) {
+  useEffect(() => {
+    const resume = resumeRef.current;
+
+    const resumeHeight = resume.offsetHeight;
+
+    console.log(resumeHeight);
+    if (resumeHeight > 1030) {
+      setNotIdeal(true);
+    } else if (notIdeal === true) {
+      setNotIdeal(false);
+    }
+  }, [resumeData]);
+  function applyBorder(name) {
+    if (
+      resumeData[name].length !== 0 &&
+      sequence[sequence.length - 1].name !== name
+    ) {
+      return "0px solid black";
+    }
+    return "0px solid black";
+  }
   const resumeRef = useRef();
   return (
-    <div className="display-resume">
+    <div className="display-resume" style={{ paddingBottom: 20 }}>
       <div className="display-resume-head">Resume Preview</div>
       <div className="resume-container" ref={resumeRef}>
-        <div className="personal-info">
-          <div className="person-name">{fullName}</div>
-          <div className="person-other-info">
-            <div className="person-email">
-              <div>
-                <MdEmail fontSize={17} />
-              </div>
-              <div>{email}</div>
+        <PersonalInfoDisplay resumeData={resumeData} />
+        {sequence.map((obj, index) => {
+          const element = obj.name;
+          const label = obj.label;
+          return (
+            <div
+              className={`person-elements person-${element}`}
+              style={{ borderBottom: applyBorder(element) }}
+            >
+              {resumeData[element].length !== 0 && (
+                <div className="person-elements-head">{label}</div>
+              )}
+              {resumeData[element].map((element, idx) => {
+                return (
+                  <div key={idx} className="person-elements-element">
+                    <div className="person-elements-box">
+                      {element.title && (
+                        <div className="person-elements-element-title">
+                          {element.title}
+                        </div>
+                      )}
+                      {element.from && typeof element.to !== "undefined" && (
+                        <div className="person-elements-element-startend">
+                          {transformDate(element.from) +
+                            " - " +
+                            transformDate(element.to)}
+                        </div>
+                      )}
+                    </div>
+                    {element.description && (
+                      <div
+                        className="person-element-description"
+                        style={{ margin: 5 }}
+                      >
+                        {element.description}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
-            <div className="person-phone-no">
-              <div>
-                <AiFillPhone fontSize={17} />
-              </div>
-              <div>+91 {phoneNo}</div>
-            </div>
-          </div>
-        </div>
-        <div className="person-experiences">
-          {experiences.length !== 0 && (
-            <div className="person-experiences-head">
-              Experience (Job/Internship)
-            </div>
-          )}
-          {experiences.map((experience, idx) => {
-            return (
-              <div key={idx} className="person-experiences-element">
-                <div className="person-experiences-box">
-                  <div className="person-experiences-element-title">
-                    {experience.title}
-                  </div>
-                  <div className="person-experiences-element-startend">
-                    {transformDate(experience.from) +
-                      " - " +
-                      transformDate(experience.to)}
-                  </div>
-                </div>
-                <div className="person-experiences-element-description">
-                  {experience.description}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-        <div className="person-experiences">
-          {educations.length !== 0 && (
-            <div className="person-experiences-head">Education</div>
-          )}
-          {educations.map((education, idx) => {
-            return (
-              <div key={idx} className="person-experiences-element">
-                <div className="person-experiences-box">
-                  <div className="person-experiences-element-title">
-                    {education.school}
-                  </div>
-                  <div className="person-experiences-element-startend">
-                    {transformDate(education.from) +
-                      " - " +
-                      transformDate(education.to)}
-                  </div>
-                </div>
-                <div className="person-experiences-element-description">
-                  {education.percentage}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-        <div className="person-experiences">
-          {skills.length !== 0 && (
-            <div className="person-experiences-head">Skills</div>
-          )}
-          <div className="person-experiences-element skills-title">
-            {skills.map((skill, idx) => {
-              return <div key={idx}>{skill.skill}</div>;
-            })}
-          </div>
-        </div>
-        <div className="person-experiences">
-          {achievements.length !== 0 && (
-            <div className="person-experiences-head">Achievements</div>
-          )}
-          {achievements.map((achievement, idx) => {
-            return (
-              <div key={idx} className="person-experiences-element">
-                <div className="person-experiences-box">
-                  <div className="person-experiences-element-title">
-                    {achievement.achievement}
-                  </div>
-                </div>
-                <div className="person-achievements-element-description">
-                  {achievement.description}
-                </div>
-              </div>
-            );
-          })}
-        </div>
+          );
+        })}
       </div>
       <button
         className="resume-save"
         onClick={() => downloadResume(resumeRef, resumeData)}
       >
-        Download Resume PDF
+        Download Resume PDF or Print
       </button>
     </div>
   );

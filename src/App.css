@@ -4,7 +4,8 @@
   --alert-transition: 200ms all ease-in-out;
 }
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,500;1,600;1,700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,500;1,600;1,700&family=Zen+Antique&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,500;1,600;1,700&family=Zen+Antique&family=Zen+Antique+Soft&display=swap');
 .form-container {
   padding: 1.2rem;
   font-family: monospace;
@@ -18,9 +19,7 @@
   background-color: rgb(233, 233, 233);
 }
 .add-icon-container {
-  /* border-radius: 1.2rem; */
   padding: 10px;
-  /* width: 100%; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -51,8 +50,7 @@ h1{
   display: flex;
   justify-content: center;
   background: rgba(0, 0, 0, 0.301);
-  /* padding-bottom: 20px; */
-  /* padding-top: 20px; */
+ 
 }
 .dialog-box {
   display: flex;
@@ -63,6 +61,7 @@ h1{
   border-radius: 1rem;
   border: 0.2rem solid black;
   padding: 2rem;
+  height: fit-content;
 }
 
 .input-box {
@@ -116,23 +115,46 @@ h1{
   margin: 1rem;
 }
 
-.element .experience-title{
-  font-size: 1.5rem;
+.element .element-title{
+  font-size: 1.2rem;
+  font-weight: bold;
   border-bottom: 2px solid black;
   padding-bottom: 0.6rem;
 }
 
-.element .experience-fromto{
+.element .element-fromto{
   font-weight: bold;
   padding-top: 0.6rem;
   padding-bottom: 0.6rem;
 }
 
-.element .experience-description{
+.element .element-description{
   padding-top: 0.6rem;
   font-size: 1rem;
 }
+.skills{
+  flex-direction: row;
+  padding-right: 35px;
+  justify-content: space-between;
+align-items: center;
 
+}
+.skills .element-title{
+font-size: 1rem;
+flex: 3;
+/* padding-right: 1rem; */
+border-bottom: 0px;
+}
+.social-icon{
+  color: black;
+}
+.skills .element-progress{
+border-radius: 1rem;
+flex: 1;
+border: 2px solid black;
+width: 100px;
+height: 11px;
+}
 .edit-icon{
   position: absolute;
   right: 0px;
@@ -157,23 +179,7 @@ h1{
 .dialog-button-container *{
   margin: 1rem;
 }
-.skill{
-    flex-direction: row;
-    padding-right: 35px;
-    justify-content: space-between;
-  align-items: center;
 
-  }
-.skill .skill-title{
-  font-size: 1rem;
-  padding-right: 1rem;
-}
-.skill .skill-progress{
-  border-radius: 1rem;
-  border: 2px solid black;
-  width: 100px;
-  height: 11px;
-}
 
 
 .personal-details-container{
@@ -211,6 +217,7 @@ h1{
 .distribute .display-resume{
   background-color: grey;
   font-family: 'Open Sans', sans-serif;
+  font-family: monospace;
     width: 100%;
     color: black;
     height: 100vh;
@@ -236,9 +243,11 @@ h1{
   padding-bottom: 10px;
 }
 .person-name{
-  font-size: 34px;
+  font-family: 'Zen Antique Soft', serif;
+  color: blue;
+  font-size: 40px;
+  font-weight: 400;
   text-align: center;
-  font-weight: bold;
 }
 .person-other-info{
   display: flex;
@@ -255,53 +264,86 @@ h1{
 .person-other-info >*>*{
   padding: 3px;
 }
-.person-experiences{
-  margin: 10px;
-  margin-top: 20px;
+.person-elements{
+  border-bottom: 1px solid black;
+  margin-left: 15px;
+  margin-right: 15px;
 }
 .person-skills{
   color: black;
   display: flex;
   flex-wrap: wrap;
 }
-.person-experiences-head{
+.person-elements-head{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-family: monospace;
+  font-weight: bold;
   font-size: 25px;
-  font-weight: 200;
-  width: fit-content;
-  /* font-style: italic; */
-  margin: 0px 0px 5px 0px;
-  /* padding:0px 50px 5px 0px; */
-  /* border-bottom: 1px solid black; */
-  /* text-decoration: underline; */
+  width: fit-content; 
+  color: blue;
 }
-.person-experiences-element{
-  margin: 10px;
+.person-elements-element{
+  width: 100%;
+
 }
-.person-experiences-box{
+.person-elements-box{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* border-bottom: 1px solid black; */
 }
-.person-experiences-box .person-experiences-element-title{
-  font-size: 23px;
-  /* padding-bottom: 5px; */
+.person-elements-box .person-elements-element-title{
+  font-size: 20px;
+  font-weight: 500;
 }
-.person-experiences-box .person-experiences-element-startend{
+.person-elements-box .person-elements-element-startend{
   font-style: italic;
   font-weight: 500;
   font-size: 15px;
 }
-.skills-title{
-  font-size: 1.1rem;
-  font-weight: 500;
+.person-element-description{
+  font-size: 16px !important;
+  line-height: 1.5;
 }
-.skills-title *{
-  padding: 3px;
+
+.person-skills .person-elements-element-title{
+  font-size: 18px;
+}
+.project-description{
+  font-size: 15px;
+}
+.achievements-title{
+  font-weight: 500;
+  font-size: 18px !important;
+}
+.nav-buttons{
+  display: flex;
+  justify-content: center;
+}
+.blank-project{
+  padding: 4px;
+  font-weight: 100;
+  text-align: center;
+  /* font-weight: bold; */
+  background-color: rgb(21, 98, 241);
+  color: white;
+  /* font-family: 'Open Sans', sans-serif; */
+  border: 2px solid black;
+  border-radius: 5px;
+  /* width: 189px; */
+  margin-left: 10px;
+  cursor: pointer;
+  font-size: 15px;
+
+}
+.blank-project:hover{
+  background-color: orange;
+  transition: var(--alert-transition);
 }
 .alert-box{
   position: fixed;
   bottom: 0;
+  z-index: 2;
   left: 0;
   right: 0;
   font-family: monospace;
@@ -329,7 +371,8 @@ h1{
   flex-direction: column;
 }
 .resume-save{
-  width: 250px;
+  width: 360px;
+  cursor: pointer;
   align-self: center;
   font-family: monospace;
   border-radius: 1rem;
@@ -369,8 +412,12 @@ h1{
     position: absolute;
     left: 0;
     top: 0;
+    margin:0;
   }
   .resume-save{
+    display: none;
+  }
+  .alert-box{
     display: none;
   }
 }

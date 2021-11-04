@@ -1,8 +1,9 @@
 import { AiTwotoneEdit } from "react-icons/ai";
 
 import { checkIfAnyEmpty, transformDate } from "../utils/helperUtil";
+import { editIconTitle } from "../utils/constants";
 
-export default function Experience({ element, editElementSection, idx }) {
+export default function Project({ element, editElementSection, idx }) {
   if (checkIfAnyEmpty(element)) {
     return <div className="experience-loading"></div>;
   }
@@ -16,7 +17,8 @@ export default function Experience({ element, editElementSection, idx }) {
       <div className="experience-description">{element.description}</div>
       <div
         className="edit-icon"
-        onClick={() => editElementSection("experiences", idx)}
+        title={editIconTitle}
+        onClick={() => editElementSection("projects", idx)}
       >
         <AiTwotoneEdit size={20} />
       </div>

@@ -44,29 +44,46 @@ export function compareDates(a, b) {
   const y = new Date(b);
   return x <= y;
 }
+function checkFuture(d) {
+  if (d.length === 0) {
+    return false;
+  }
+  const x = new Date(d);
+  const y = new Date();
+  return x >= y;
+}
 export function checkValidFields(elementInputs, element, setShowAlert) {
   let filled = true;
   elementInputs.every((elementInput, idx) => {
     if (
       element[elementInput.fieldName].length === 0 &&
-      elementInput.fieldName !== "to"
+      elementInput.isRequired
     ) {
       filled = false;
+      setShowAlert({
+        message: `Fill "${elementInput.labelName}" field.`,
+        duration: 2000,
+        color: "rgb(255, 0, 98)",
+        isShow: true,
+      });
       return false;
     }
     return true;
   });
   if (!filled) {
-    setShowAlert({
-      message: "Fill All Values",
-      duration: 2000,
-      color: "rgb(255, 0, 98)",
-      isShow: true,
-    });
     return false;
   }
 
   if ("to" in element && "from" in element) {
+    if (checkFuture(element["from"]) || checkFuture(element["to"])) {
+      setShowAlert({
+        message: "Start End or End Date cannot be greater than present date.",
+        duration: 3000,
+        color: "rgb(255, 0, 98)",
+        isShow: true,
+      });
+      return false;
+    }
     if (
       compareDates(element["from"], element["to"]) ||
       element["to"].length === 0

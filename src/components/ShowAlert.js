@@ -3,16 +3,17 @@ export default function ShowAlert({ showAlert, setShowAlert }) {
   const { message, isShow, duration, color } = showAlert;
   useEffect(() => {
     const dur = duration;
-    setTimeout(() => {
-      if (isShow)
+    if (isShow) {
+      setTimeout(() => {
         setShowAlert({
           message: "",
           isShow: false,
-          duration: 1000,
+          duration: 0,
           color: "#000",
         });
-    }, dur);
-  });
+      }, dur);
+    }
+  }, [showAlert]);
 
   return (
     <div

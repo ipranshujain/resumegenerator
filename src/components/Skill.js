@@ -1,7 +1,7 @@
 import { AiTwotoneEdit } from "react-icons/ai";
 
 import { checkIfAnyEmpty, getProgress } from "../utils/helperUtil";
-
+import { editIconTitle } from "../utils/constants";
 export default function Skill({ element, editElementSection, idx }) {
   if (checkIfAnyEmpty(element)) {
     return <div className="experience-loading">Inputting Experience</div>;
@@ -17,6 +17,7 @@ export default function Skill({ element, editElementSection, idx }) {
         }}
       ></div>
       <div
+        title={editIconTitle}
         className="edit-icon"
         onClick={() => editElementSection("skills", idx)}
       >
