@@ -226,13 +226,13 @@ const projectsInputs = [
   ...linkInputs("Project"),
 ];
 const sampleResumeData = {
-  fullName: "Rahul Sharma",
+  fullName: "Rohit Sharma",
   email: "rahul.sharma109@gmail.com",
   phoneNo: "+91 9999999999",
-  github: "",
-  twitter: "",
-  linkedin: "",
-  portfolio: "",
+  github: "https://github.com/ipranshujain",
+  twitter: "https://twitter.com/PranshuJain04",
+  linkedin: "https://www.linkedin.com/in/pranshujain4/",
+  portfolio: "https://pranshujain.vercel.app/",
   experiences: [
     {
       title: "Google, Hyderabad",
@@ -241,7 +241,7 @@ const sampleResumeData = {
       from: "2021-10-05",
       to: "2021-11-10",
       githubLink: "",
-      deployedLink: "",
+      deployedLink: "https://www.google.com",
     },
     {
       title: "Amazon, Pune",
@@ -250,7 +250,7 @@ const sampleResumeData = {
       from: "2021-11-25",
       to: "",
       githubLink: "",
-      deployedLink: "",
+      deployedLink: "https://www.amazon.com",
     },
   ],
   educations: [
@@ -299,8 +299,8 @@ const sampleResumeData = {
         "Used ReactJS to build the frontend of this application, NodeJS to build the backend, mongo for database, and GraphQL from querying data. This e-commerce site mimics some behavior of other sites but is unique in a way that allows users to negotiate prices with the client.",
       from: "2021-10-02",
       to: "2021-11-09",
-      githubLink: "",
-      deployedLink: "",
+      githubLink: "https://github.com/ipranshujain",
+      deployedLink: "https://pranshujain.vercel.app/",
     },
     {
       title: "Decentralized Twitter, (Algorand, Web3) ",
@@ -308,8 +308,8 @@ const sampleResumeData = {
         "In this project, I have created a small decentralized version of Twitter which means that no one owns it and all the history about users is immutable and therefore it is trustless.",
       from: "2021-11-02",
       to: "2021-11-30",
-      githubLink: "",
-      deployedLink: "",
+      githubLink: "https://github.com/ipranshujain",
+      deployedLink: "https://pranshujain.vercel.app/",
     },
   ],
 };

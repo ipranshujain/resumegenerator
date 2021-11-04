@@ -16,7 +16,7 @@ export default function DisplayResume({
     const resumeHeight = resume.offsetHeight;
 
     console.log(resumeHeight);
-    if (resumeHeight > 1030) {
+    if (resumeHeight >= 1000) {
       setNotIdeal(true);
     } else if (notIdeal === true) {
       setNotIdeal(false);
@@ -90,7 +90,7 @@ export default function DisplayResume({
                     {element.description && (
                       <div
                         className="person-element-description"
-                        style={{ margin: 5 }}
+                        style={{ marginTop: 3, marginBottom: 3 }}
                       >
                         {element.description}
                       </div>
