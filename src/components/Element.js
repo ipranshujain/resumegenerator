@@ -9,10 +9,6 @@ export default function Experience({
   idx,
   field,
 }) {
-  // if (checkIfAnyEmpty(element)) {
-  //   return <div className="experience-loading"></div>;
-  // }
-
   return (
     <div className={`element ${field}`}>
       {element.title && <div className="element-title">{element.title}</div>}

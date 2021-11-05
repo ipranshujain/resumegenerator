@@ -151,7 +151,7 @@ function App() {
             {sequence.map((obj, idx) => {
               const field = obj.name;
               return (
-                <div key="idx" className="element-container">
+                <div key={idx} className="element-container">
                   <h1>Enter {field.substr(0, field.length - 1)}</h1>
                   {resumeData[field].map((element, i) => {
                     return (

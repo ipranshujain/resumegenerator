@@ -107,16 +107,28 @@ export function saveToLocalStorage(resumeData) {
 }
 
 export function downloadResume(resumeRef, resumeData) {
-  const resume = resumeRef.current;
-  const title = resumeData.fullName + " Resume";
-  let convertedTitle = "";
-  for (let i = 0; i < title.length; i++) {
-    let value = title[i];
-    if (value === " ") {
-      convertedTitle += "_";
-    } else {
-      convertedTitle += value.toLowerCase();
-    }
-  }
   window.print();
+}
+
+export function changeRootTheme(theme) {
+  document.documentElement.style.setProperty(
+    "--resume-primary-color",
+    theme.primaryColor
+  );
+  document.documentElement.style.setProperty(
+    "--resume-secondary-color",
+    theme.secondaryColor
+  );
+  document.documentElement.style.setProperty(
+    "--resume-background-color",
+    theme.backgroundColor
+  );
+  document.documentElement.style.setProperty(
+    "--resume-primary-font",
+    theme.primaryFont
+  );
+  document.documentElement.style.setProperty(
+    "--resume-secondary-font",
+    theme.secondaryFont
+  );
 }

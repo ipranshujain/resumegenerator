@@ -327,6 +327,20 @@ const emptyResumeData = {
   achievements: [],
   projects: [],
 };
+// font: italic small-caps bold 12px/30px Georgia, serif;
+const defaultTheme = {
+  primaryColor: "rgba(70, 88, 250, 1)",
+  secondaryColor: "rgba(0, 0, 0,1)",
+  backgroundColor: "rgba(255, 255, 255,1)",
+  primaryFont: `monospace`,
+  secondaryFont: `monospace`,
+};
+const fonts = [
+  "monospace",
+  `'Open Sans', sans-serif`,
+  `'Zen Antique Soft', serif`,
+  `'Noto Sans', sans-serif`,
+];
 const inputs = {
   personalInfoInputs,
   experiencesInputs,
@@ -345,4 +359,6 @@ export {
   educationsInputs,
   sampleResumeData,
   emptyResumeData,
+  defaultTheme,
+  fonts,
 };

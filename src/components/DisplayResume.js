@@ -1,27 +1,48 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
-import { downloadResume, transformDate } from "../utils/helperUtil";
+import {
+  downloadResume,
+  transformDate,
+  changeRootTheme,
+} from "../utils/helperUtil";
 import { PersonalInfoDisplay } from "./PersonalInfoDisplay";
 import { HiExternalLink } from "react-icons/hi";
 import { AiFillGithub } from "react-icons/ai";
+import { defaultTheme } from "../utils/inputUtil";
+import { RESUME_HEIGHT, RESUME_WIDTH } from "../utils/constants";
+import ChangeTheme from "./ChangeTheme";
 export default function DisplayResume({
   resumeData,
   setNotIdeal,
   notIdeal,
   sequence,
 }) {
+  const [theme, setTheme] = useState(defaultTheme);
+
   useEffect(() => {
     const resume = resumeRef.current;
-
-    const resumeHeight = resume.offsetHeight;
-
-    console.log(resumeHeight);
-    if (resumeHeight >= 1000) {
+    const currentHeight = resume.offsetHeight;
+    console.log(currentHeight);
+    if (currentHeight >= RESUME_HEIGHT) {
       setNotIdeal(true);
     } else if (notIdeal === true) {
       setNotIdeal(false);
     }
   }, [resumeData]);
+  useEffect(() => {
+    changeRootTheme(theme);
+  }, [theme]);
+  function handleThemeChange(color, field) {
+    theme[
+      field
+    ] = `rgba(${color.rgb.r}, ${color.rgb.g}, ${color.rgb.b}, ${color.rgb.a})`;
+    console.log("RBG", color.rgb);
+    setTheme({ ...theme });
+  }
+  function handleFontChange(e, field) {
+    theme[field] = e.target.value;
+    setTheme({ ...theme });
+  }
   function applyBorder(name) {
     if (
       resumeData[name].length !== 0 &&
@@ -35,13 +56,23 @@ export default function DisplayResume({
   return (
     <div className="display-resume" style={{ paddingBottom: 20 }}>
       <div className="display-resume-head">Resume Preview</div>
-      <div className="resume-container" ref={resumeRef}>
+      <ChangeTheme
+        theme={theme}
+        handleChange={handleThemeChange}
+        handleFontChange={handleFontChange}
+      />
+      <div
+        className="resume-container"
+        ref={resumeRef}
+        style={{ width: `${RESUME_WIDTH}px` }}
+      >
         <PersonalInfoDisplay resumeData={resumeData} />
         {sequence.map((obj, index) => {
           const element = obj.name;
           const label = obj.label;
           return (
             <div
+              key={index}
               className={`person-elements person-${element}`}
               style={{ borderBottom: applyBorder(element) }}
             >

@@ -2,11 +2,13 @@
   --white: #fff;
   --blue: #fbb;
   --alert-transition: 200ms all ease-in-out;
-  --resume-secondary-color: rgb(4, 94, 179);
+  --resume-primary-color: none;
+  --resume-secondary-color: none;
+  --resume-background-color: none;
+  --resume-primary-font: none;
+  --resume-secondary-font:none;
 }
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,500;1,600;1,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,500;1,600;1,700&family=Zen+Antique&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,500;1,600;1,700&family=Zen+Antique&family=Zen+Antique+Soft&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital@0;1&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,500;1,600;1,700&family=Zen+Antique&family=Zen+Antique+Soft&display=swap');
 .form-container {
   padding: 1.2rem;
   font-family: monospace;
@@ -50,6 +52,7 @@ h1{
   width: 100vw;
   display: flex;
   justify-content: center;
+  min-width: 930px;
   background: rgba(0, 0, 0, 0.301);
  
 }
@@ -143,11 +146,11 @@ align-items: center;
 .skills .element-title{
 font-size: 1rem;
 flex: 3;
-/* padding-right: 1rem; */
 border-bottom: 0px;
+
 }
 .social-icon{
-  color: black;
+  color: var(--resume-secondary-color);
 }
 .skills .element-progress{
 border-radius: 1rem;
@@ -237,18 +240,19 @@ height: 11px;
 .resume-container{
   margin: 6px;
   padding: 10px;
-  background-color: rgb(255, 255, 255);
+  background-color: var(--resume-background-color);
 }
 .personal-info{
   border-bottom: 2px solid black;
   padding-bottom: 10px;
 }
 .person-name{
-  font-family: 'Zen Antique Soft', serif;
-  color: var(--resume-secondary-color);
+  /* font-family: 'Zen Antique Soft', serif; */
+  color: var(--resume-primary-color);
+  text-align: center;
   font-size: 35px;
   font-weight: 400;
-  text-align: center;
+  font-family: var(--resume-primary-font);
 }
 .person-other-info{
   display: flex;
@@ -261,13 +265,12 @@ height: 11px;
   font-size: 19px;
   display: flex;
   align-self: center;
-  /* justify-content: center; */
+  color: var(--resume-secondary-color);
 }
 .person-other-info >.person-social{
   padding-left: 5px;
   padding-right: 5px;
 }
-/* .person-other-info > */
 .person-other-info >*>*{
   padding: 2px;
 }
@@ -275,6 +278,8 @@ height: 11px;
   border-bottom: 1px solid black;
   margin-left: 10px;
   margin-right: 10px;
+  color: var(--resume-secondary-color);
+  font-family: var(--resume-secondary-font);
 }
 .person-skills{
   color: black;
@@ -288,7 +293,8 @@ height: 11px;
   font-weight: bold;
   font-size: 25px;
   width: fit-content; 
-  color: var(--resume-secondary-color);
+  color: var(--resume-primary-color);
+  font-family: var(--resume-primary-font);
 }
 .person-elements-element{
   width: 100%;
@@ -331,6 +337,7 @@ height: 11px;
 
 .person-skills .person-elements-element-title{
   font-size: 18px;
+  color: var(--resume-secondary-color)
 }
 .project-description{
   font-size: 15px;
@@ -407,6 +414,48 @@ height: 11px;
   font-size: 1.3rem;
   border: 2px solid black;
 }
+
+.change-theme{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  background-color: white;
+  align-items: center;
+  padding: 6px;
+}
+.change-theme .change-theme-element{
+  display: flex;
+  border: 1px solid black;
+  border-radius: 15px;
+  color: white;
+  margin-left: 10px;
+  margin-right: 10px;
+  align-items: center;
+  padding: 3px;
+  font-weight: 600;
+  font-size: 16px;
+  background-color: rgb(255, 168, 70);
+  cursor: pointer;
+}
+.change-theme-element .color-pick{
+  border-radius: 14px;
+  width: 14px;
+  height: 14px;
+  border: 1px solid black;
+}
+.change-theme-element *{
+  padding: 5px;
+  color: black;
+}
+.font-select{
+  margin-top: 5px;
+  border-radius: 4px !important;
+  color: rgb(19, 13, 13) !important;
+  font-size: 17px !important;
+  font-style: italic;
+  font-weight: 200 !important;
+  font-family: 'Open-Sans', sans-serif;
+}
 @media (max-width: 900px) {
   .distribute{
     flex-direction: column;
@@ -431,11 +480,15 @@ height: 11px;
   .display-resume-head {
     display: none;
   }
+  .change-theme{
+    display: none;
+  }
   .resume-container {
     position: absolute;
     left: 0;
     top: 0;
     margin:0;
+    overflow: auto;
   }
   .resume-save{
     display: none;
