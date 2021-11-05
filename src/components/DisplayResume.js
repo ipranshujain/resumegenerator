@@ -121,7 +121,7 @@ export default function DisplayResume({
                     {element.description && (
                       <div
                         className="person-element-description"
-                        style={{ marginTop: 3, marginBottom: 3 }}
+                        style={{ margin: 6 }}
                       >
                         {element.description}
                       </div>
